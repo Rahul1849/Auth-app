@@ -1,0 +1,45 @@
+/* .otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .otp-input {
+    text-align: center;
+    font-size: 1.5rem;
+    width: 45px;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  .eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .recaptcha-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  @media (max-width: 600px) {
+    .recaptcha-container {
+      transform: scale(0.85);
+      transform-origin: center;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .recaptcha-container {
+      transform: scale(0.75);
+      transform-origin: center;
+    }
+  }
+  
+   */
