@@ -42,7 +42,7 @@ const RegistrationForm = () => {
     
     localStorage.setItem("password", password);
     alert("Password Reset! You can login now.");
-    navigate("/login");
+    navigate("/");
   };
 
   const isFormValid = () => {
@@ -66,13 +66,13 @@ const RegistrationForm = () => {
             {(
               <>
                 <Form.Group className="mb-3">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label></Form.Label>
                   <div className="position-relative">
                     <Form.Control 
                       type={showPassword ? "text" : "password"} 
                       value={password} 
                       onChange={(e) => setPassword(e.target.value)} 
-                      placeholder="Min. 6 characters, at least (1 uppercase, 1 number, 1 special character)"
+                      placeholder="Password"
                       required 
                     />
                     <span 
@@ -85,7 +85,7 @@ const RegistrationForm = () => {
                   </div>
                 </Form.Group>
                 <Form.Group className="mb-4">
-                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Label></Form.Label>
                   <div className="position-relative">
                     <Form.Control 
                       type={showConfirmPassword ? "text" : "password"} 

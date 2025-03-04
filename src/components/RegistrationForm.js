@@ -115,7 +115,7 @@ const RegistrationForm = () => {
     localStorage.setItem("email", email);
     localStorage.setItem("password", password);
     alert("Registration successful!");
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -125,162 +125,172 @@ const RegistrationForm = () => {
           <h2 className="text-center mb-4">Complete Registration</h2>
           {errorMessage && <p className="text-danger text-center">{errorMessage}</p>}
           <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>
-                First Name <span className="text-danger">*</span>
-              </Form.Label>
-              <Form.Control
-                type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                placeholder="Enter your first name"
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>
-                Last Name <span className="text-danger">*</span>
-              </Form.Label>
-              <Form.Control
-                type="text"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                placeholder="Enter your last name"
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Email (Optional)</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
-                disabled={!firstName.trim() || !lastName.trim()} // Disable until first and last name are filled
-              />
-            </Form.Group>
+  <Form.Group className="mb-2"> {/* Changed from mb-3 to mb-2 */}
+    <Form.Label>
+      {/* <span className="text-danger">*</span> */}
+    </Form.Label>
+    <Form.Control
+      type="text"
+      value={firstName}
+      onChange={(e) => setFirstName(e.target.value)}
+      placeholder="First Name*"
+      required
+    />
+  </Form.Group>
+  <Form.Group className="mb-2"> {/* Changed from mb-3 to mb-2 */}
+    <Form.Label>
+      {/* <span className="text-danger">*</span> */}
+    </Form.Label>
+    <Form.Control
+      type="text"
+      value={lastName}
+      onChange={(e) => setLastName(e.target.value)}
+      placeholder="Last Name*"
+      required
+    />
+  </Form.Group>
+  <Form.Group className="mb-2"> {/* Changed from mb-3 to mb-2 */}
+    <Form.Label></Form.Label>
+    <Form.Control
+      type="email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      placeholder="Email (Optional)"
+      disabled={!firstName.trim() || !lastName.trim()} // Disable until first and last name are filled
+    />
+  </Form.Group>
 
-            {email && !otpSent ? (
-              <Button
-                onClick={sendOTP}
-                disabled={!email}
-                className="w-100 mb-3"
-              >
-                Send OTP
-              </Button>
-            ) : null}
+  {email && !otpSent ? (
+    <Button
+      onClick={sendOTP}
+      disabled={!email}
+      className="w-100 mb-3"
+    >
+      Get OTP
+    </Button>
+  ) : null}
 
-            {otpSent && (
-              <>
-                <Form.Group className="mb-3">
-                  <Form.Label>Enter OTP</Form.Label>
-                  <div className="otp-inputs d-flex justify-content-center">
-                    {otp.map((digit, index) => (
-                      <Form.Control
-                        key={index}
-                        id={`otp-${index}`}
-                        type="text"
-                        value={digit}
-                        onChange={(e) => handleOtpChange(index, e.target.value)}
-                        onKeyDown={(e) => handleOtpBackspace(index, e)}
-                        maxLength={1}
-                        className="text-center mx-1"
-                        style={{ width: "40px", height: "40px" }}
-                        disabled={otpVerified}
-                      />
-                    ))}
-                  </div>
-                </Form.Group>
-                <Button
-                  onClick={verifyOTP}
-                  disabled={otp.join("").length !== 4 || otpVerified}
-                  className="w-100 mb-3"
-                >
-                  {otpVerified ? "Verified" : "Verify OTP"}
-                </Button>
-              </>
-            )}
+  {otpSent && (
+    <>
+      <Form.Group className="mb-2"> {/* Changed from mb-3 to mb-2 */}
+        <Form.Label>Enter OTP</Form.Label>
+        <div className="otp-inputs d-flex justify-content-center">
+          {otp.map((digit, index) => (
+            <Form.Control
+              key={index}
+              id={`otp-${index}`}
+              type="text"
+              value={digit}
+              onChange={(e) => handleOtpChange(index, e.target.value)}
+              onKeyDown={(e) => handleOtpBackspace(index, e)}
+              maxLength={1}
+              className="text-center mx-1"
+              style={{ width: "40px", height: "40px" }}
+              disabled={otpVerified}
+            />
+          ))}
+        </div>
+      </Form.Group>
+      <Button
+        onClick={verifyOTP}
+        disabled={otp.join("").length !== 4 || otpVerified}
+        className="w-100 mb-3"
+      >
+        {otpVerified ? "Verified" : "Continue"}
+      </Button>
+    </>
+  )}
 
-            {(otpVerified || !email) && (
-              <>
-                <Form.Group className="mb-4">
-                  <Form.Label>
-                    Password <span className="text-danger">*</span>
-                  </Form.Label>
-                  <div className="position-relative">
-                    <Form.Control
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Min. 6 characters, at least (1 uppercase, 1 number, 1 special character)"
-                      required
-                    />
-                    <span
-                      className="position-absolute"
-                      style={{ right: "10px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
-                    </span>
-                  </div>
-                </Form.Group>
-                <Form.Group className="mb-4">
-                  <Form.Label>
-                    Confirm Password <span className="text-danger">*</span>
-                  </Form.Label>
-                  <div className="position-relative">
-                    <Form.Control
-                      type={showConfirmPassword ? "text" : "password"}
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="Re-enter your password"
-                      required
-                    />
-                    <span
-                      className="position-absolute"
-                      style={{ right: "10px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }}
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    >
-                      {showConfirmPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
-                    </span>
-                  </div>
-                </Form.Group>
+  {(otpVerified || !email) && (
+    <>
+      <Form.Group className="mb-3"> {/* Changed from mb-4 to mb-3 */}
+        <Form.Label>
+          {/* <span className="text-danger">*</span> */}
+        </Form.Label>
+        <div className="position-relative">
+          <Form.Control
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password*"
+            required
+          />
+          <span
+            className="position-absolute"
+            style={{
+              right: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+            }}
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+          </span>
+        </div>
+      </Form.Group>
+      <Form.Group className="mb-3"> {/* Changed from mb-4 to mb-3 */}
+        <Form.Label>
+          {/* <span className="text-danger">*</span> */}
+        </Form.Label>
+        <div className="position-relative">
+          <Form.Control
+            type={showConfirmPassword ? "text" : "password"}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Re-enter your password*"
+            required
+          />
+          <span
+            className="position-absolute"
+            style={{
+              right: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+            }}
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            {showConfirmPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+          </span>
+        </div>
+      </Form.Group>
 
-                <Form.Group className="mb-3">
-  <Form.Check
-    type="checkbox"
-    label={
-      <>
-        I agree to the Terms and Conditions <span className="text-danger">*</span>
-      </>
-    }
-    checked={agreeToTerms}
-    onChange={(e) => setAgreeToTerms(e.target.checked)}
-    required
-  />
-</Form.Group>
+      <Form.Group className="mb-2"> {/* Changed from mb-3 to mb-2 */}
+        <Form.Check
+          type="checkbox"
+          label={
+            <>
+              I agree to the Terms and Conditions <span className="text-danger">*</span>
+            </>
+          }
+          checked={agreeToTerms}
+          onChange={(e) => setAgreeToTerms(e.target.checked)}
+          required
+        />
+      </Form.Group>
 
-{/* ✅ CAPTCHA added here */}
-<div className="mb-3 d-flex justify-content-center">
-                  <ReCAPTCHA sitekey={RECAPTCHA_SITE_KEY} onChange={setCaptchaValue} />
-                </div>
+      {/* ✅ CAPTCHA added here */}
+      <div className="mb-3 d-flex justify-content-center">
+        <ReCAPTCHA sitekey={RECAPTCHA_SITE_KEY} onChange={setCaptchaValue} />
+      </div>
 
-<Button onClick={handleRegister} className="w-100" disabled={!isFormValid || !agreeToTerms || !captchaValue}>
-  Sign Up
-</Button>
+      <Button onClick={handleRegister} className="w-100" disabled={!isFormValid || !agreeToTerms || !captchaValue}>
+        Sign Up
+      </Button>
+    </>
+  )}
+  {resendTimeout <= 0 && !otpSent && (
+    <Button
+      onClick={sendOTP}
+      className="w-100 mb-3"
+      disabled={otpSent}
+    >
+      Resend OTP
+    </Button>
+  )}
+</Form>
 
-              </>
-            )}
-            {resendTimeout <= 0 && !otpSent && (
-              <Button
-                onClick={sendOTP}
-                className="w-100 mb-3"
-                disabled={otpSent}
-              >
-                Resend OTP
-              </Button>
-            )}
-          </Form>
         </Col>
       </Row>
     </Container>

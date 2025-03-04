@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css"; // Import styles for the phone input
 
 const ResetPassword = () => {
   const [phone, setPhone] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState(["", "", "", ""]); // Array for OTP input
   const navigate = useNavigate(); // Initialize useNavigate
-
-  // Handle phone number input (allow only numbers, max 10 digits)
-  const handlePhoneChange = (e) => {
-    const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-    if (value.length <= 10) {
-      setPhone(value);
-    }
-  };
 
   const sendOTP = () => {
     setOtpSent(true);
@@ -60,23 +54,27 @@ const ResetPassword = () => {
           <h2 className="text-center mb-4">Reset Password</h2>
           <Form>
             <Form.Group className="mb-3">
-              <Form.Label>Phone Number</Form.Label>
-              <Form.Control
-                type="text"
+              <Form.Label></Form.Label>
+              <PhoneInput
+                country={"in"} // Set default country to India
                 value={phone}
-                onChange={handlePhoneChange}
-                placeholder="Enter your phone number"
-                required
+                onChange={(value) => setPhone(value)}
+                placeholder="Phone Number"
+                inputStyle={{
+                  width: "100%",
+                  height: "40px",
+                  fontSize: "16px",
+                }}
               />
             </Form.Group>
 
             {!otpSent ? (
               <Button 
                 onClick={sendOTP} 
-                disabled={phone.length !== 10} 
+                disabled={phone.length < 12} // Ensures phone number is valid (including country code)
                 className="w-100 mb-3"
               >
-                Send OTP
+                Get OTP
               </Button>
             ) : (
               <>
@@ -104,7 +102,7 @@ const ResetPassword = () => {
                   disabled={otp.join("").length !== 4} 
                   className="w-100 mb-3"
                 >
-                  Verify OTP
+                  Continue
                 </Button>
               </>
             )}

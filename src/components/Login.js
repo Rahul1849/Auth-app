@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import "../styles/SignUp.css"; // Import the same styling as SignUp
 
 // ✅ Load environment variable
 const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
@@ -17,7 +18,7 @@ const Login = () => {
   const isValidInput = () => {
     return (
       loginInput.length > 0 &&
-      (loginInput.includes("@") || /^\d{12}$/.test(loginInput)) // Valid email or 10-digit phone number
+      (loginInput.includes("@") || /^\d{12}$/.test(loginInput)) // Valid email or 12-digit phone number
     );
   };
 
@@ -48,30 +49,40 @@ const Login = () => {
   };
 
   return (
-    <Container fluid>
-      <Row className="justify-content-center">
-        <Col xs={12} sm={10} md={8} lg={6}>
+    <Container fluid className="signup-container">
+      <Row className="signup-row">
+        {/* Sidebar Section */}
+        <Col className="sidebar">
+          <div className="company-info">
+            <img src="/logo.png" alt="Company Logo" className="company-logo" />
+            <h3 className="company-name">Vimala Care</h3>
+            <p className="company-goal"></p>
+          </div>
+        </Col>
+
+        {/* Login Form Section */}
+        <Col className="signup-form">
           <h2 className="text-center mb-4">Login</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group>
-              <Form.Label>Email or Phone Number
-              </Form.Label>
+              <Form.Label></Form.Label>
               <Form.Control
                 type="text"
                 value={loginInput}
                 onChange={(e) => setLoginInput(e.target.value)}
-                placeholder="Enter your email or phone number(add 91 before phone number)"
+                placeholder="Email or Phone Number"
                 required
               />
             </Form.Group>
 
             <Form.Group className="mt-3">
-              <Form.Label>Password</Form.Label>
+              <Form.Label></Form.Label>
               <div style={{ position: "relative" }}>
                 <Form.Control
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
                   required
                 />
                 <span
@@ -89,7 +100,11 @@ const Login = () => {
               </div>
             </Form.Group>
 
-            <div className="mt-4 recaptcha-container">
+            {/* Center CAPTCHA below the password */}
+            <div
+              className="mt-3 recaptcha-container"
+              style={{ display: "flex", justifyContent: "center" }}
+            >
               {RECAPTCHA_SITE_KEY ? (
                 <ReCAPTCHA sitekey={RECAPTCHA_SITE_KEY} onChange={handleCaptchaChange} />
               ) : (
@@ -104,11 +119,26 @@ const Login = () => {
             >
               Login
             </Button>
-          </Form>
 
-          <Button variant="link" onClick={() => navigate("/reset-password")} className="d-block text-center mt-2">
-            Forgot Password?
-          </Button>
+            <Button
+              variant="link"
+              onClick={() => navigate("/reset-password")}
+              className="d-block text-center mt-2"
+            >
+              Forgot Password?
+            </Button>
+
+            {/* Add Signup Link */}
+            <p className="text-center mt-3">
+              Don't have an account?{" "}
+              <span
+                style={{ color: "#007bff", cursor: "pointer" }}
+                onClick={() => navigate("/sign")}
+              >
+                Sign Up
+              </span>
+            </p>
+          </Form>
         </Col>
       </Row>
     </Container>

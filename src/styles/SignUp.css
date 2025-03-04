@@ -1,109 +1,145 @@
 /* Full Page Layout */
 .signup-container {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Row to manage layout */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Row to manage layout */
+.signup-row {
+  width: 90%;
+  max-width: 1200px;
+  height: 80vh;
+  display: flex;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 40%;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Company Logo */
+.company-logo {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Company Name */
+.company-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Company Goal */
+.company-goal {
+  font-size: 14px;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* SignUp Form Section */
+.signup-form {
+  width: 60%;
+  background: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Phone Input Field */
+.phone-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Added spacing between input and button */
+  width: 100%;
+}
+
+/* Phone Input */
+.phone-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* OTP Button */
+.get-otp-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.get-otp-btn:hover {
+  background: #0056b3;
+}
+
+/* OTP Inputs */
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.otp-inputs input {
+  text-align: center;
+  font-size: 1.5rem;
+  width: 45px;
+  height: 50px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Resend OTP */
+.resend-otp {
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-top: 10px;
+}
+
+.resend-otp:hover {
+  color: #0056b3;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .signup-row {
-    width: 90%;
-    max-width: 1200px;
-    height: 80vh;
-    display: flex;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
-  /* Sidebar Styling */
-  .sidebar {
-    width: 40%;
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-  }
-
-  .company-logo {
-    width: 100%; /* Responsive to container */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 300px; /* Optional max width */
-    display: block; /* Centers the image */
-    margin: 0 auto; /* Center the image */
-  }
-  
-  
-  /* Company Logo */
-  .company-logo {
-    width: 200px;
-    height: 200px;
-    margin-bottom: 10px;
-  }
-  
-  /* Company Name */
-  .company-name {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  /* Company Goal */
-  .company-goal {
-    font-size: 14px;
-    margin-top: 10px;
-    font-style: italic;
-  }
-  
-  /* SignUp Form Section */
-  .signup-form {
-    width: 60%;
-    background: white;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .otp-inputs {
-    display: flex;
-    justify-content: center; /* Center align the inputs */
-    margin-bottom: 20px; /* Add space below the OTP inputs */
-  }
-  
-  .otp-inputs input {
-    text-align: center; /* Center align text in the input */
-    font-size: 1.5rem; /* Adjust font size */
-    width: 40px; /* Adjust width for closer spacing */
-    margin: 0 2px; /* Reduced space between inputs */
-  }
-  .phone-input {
-    margin-bottom: 15px; /* Adds space below the input */
-  }
-  
-  
-  
-  
-  /* Responsive Adjustments */
-  @media (max-width: 768px) {
-    .signup-row {
       flex-direction: column;
       height: auto;
-    }
-  
-    .sidebar {
-      width: 100%;
-      padding: 20px;
-    }
-  
-    .signup-form {
-      width: 100%;
-      padding: 20px;
-    }
   }
-  
-  
+
+  .sidebar {
+      width: 100%;
+      padding: 20px;
+  }
+
+  .signup-form {
+      width: 100%;
+      padding: 20px;
+  }
+}
