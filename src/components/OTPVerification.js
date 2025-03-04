@@ -9,14 +9,14 @@ const OTPVerification = () => {
   const handleVerify = (e) => {
     e.preventDefault();
     // Logic to verify OTP (e.g., API call)
-    if (otp === "123456") { // Replace this with your actual verification logic
+    if (otp === "1234") { // Replace this with your actual verification logic
       alert("OTP verified successfully!");
       navigate("/dashboard"); // Redirect to the dashboard on success
     } else {
       alert("Invalid OTP. Please try again.");
     }
   };
-
+// this is my OtpVerification page
   return (
     <Container>
       <Row className="justify-content-md-center">
