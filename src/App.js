@@ -26,6 +26,4 @@ function App() {
   );
 }
 
-// This is my App.js file.
-
 export default App;
