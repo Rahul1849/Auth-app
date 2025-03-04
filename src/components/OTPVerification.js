@@ -16,7 +16,6 @@ const OTPVerification = () => {
       alert("Invalid OTP. Please try again.");
     }
   };
-// this is my OtpVerification page
   return (
     <Container>
       <Row className="justify-content-md-center">
